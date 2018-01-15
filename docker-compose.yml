@@ -1,0 +1,30 @@
+version: "2"
+
+services:
+  default:
+    build: .
+    container_name: last_vocabulary_bot
+    entrypoint:
+     - python
+     - -u
+     - main.py
+    volumes:
+     - .:/src/
+  pyconsole:
+    build: .
+    container_name: last_vocabulary_bot_pyconsole
+    entrypoint:
+     - python
+    tty: true
+    stdin_open: true
+    volumes:
+     - .:/src/
+  shconsole:
+    build: .
+    container_name: last_vocabulary_bot_shconsole
+    entrypoint:
+     - sh
+    tty: true
+    stdin_open: true
+    volumes:
+     - .:/src/

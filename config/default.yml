@@ -1,0 +1,9 @@
+vocabulary:
+  url: https://www.vocabulary.com/
+  mastered_words_url: 'https://www.vocabulary.com/account/progress/words/mastered'
+  cookies:
+  headers:
+telegram:
+    key: ''
+    me_id: 0000000000
+time_to_send: '22:00'
