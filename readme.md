@@ -8,9 +8,9 @@ The bot reminds last learned words like this:
 
 ```
 git clone https://github.com/wwju/vocabulary_com_telegram__bot.git
-cd vocabulary_com_telegram__bot
-cp config/default.yml config/private.yml
-# Setup your creditials for telegram and vocabulary.com in config.private.yml
+cd ./vocabulary_com_telegram__bot
+cp ./.env.example ./.env
+# Setup your creditials for telegram and vocabulary.com in .env
 docker-compose build
 bin/app
 ```

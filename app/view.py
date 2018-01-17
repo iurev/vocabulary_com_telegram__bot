@@ -1,6 +1,3 @@
-from app.config import config
-
-
 def format(words):
     result = "*Your last mastered words:*\n\n"
     result += "```\n"

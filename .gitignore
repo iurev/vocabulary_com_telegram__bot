@@ -1,3 +1,4 @@
-config/private.yml
+.env
 .vscode
 __pycache__
+tmp/

@@ -1,15 +1,21 @@
 import requests
 from bs4 import BeautifulSoup
-from app.config import config as _conf
+import os
 
-config = _conf["vocabulary"]
+
+def get_config(config_str):
+    result = {}
+    for line in config_str.split("\\n"):
+        (key, val) = line.split(": ")
+        result[key.replace("'", "")] = val.replace("'", "")
+    return result
 
 
 def request():
     return requests.get(
-        config["mastered_words_url"],
-        headers=config["headers"],
-        cookies=config["cookies"]
+        os.environ["VOCABULARY_MASTERED_WORDS_URL"],
+        headers=get_config(os.environ["VOCABULARY_HEADERS"]),
+        cookies=get_config(os.environ["VOCABULARY_COOKIES"])
     )
 
 

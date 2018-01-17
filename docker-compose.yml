@@ -8,8 +8,8 @@ services:
      - python
      - -u
      - main.py
-    volumes:
-     - .:/src/
+    env_file:
+      - .env
   pyconsole:
     build: .
     container_name: last_vocabulary_bot_pyconsole
@@ -17,8 +17,8 @@ services:
      - python
     tty: true
     stdin_open: true
-    volumes:
-     - .:/src/
+    env_file:
+      - .env     
   shconsole:
     build: .
     container_name: last_vocabulary_bot_shconsole
@@ -26,5 +26,5 @@ services:
      - sh
     tty: true
     stdin_open: true
-    volumes:
-     - .:/src/
+    env_file:
+      - .env
