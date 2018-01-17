@@ -1,0 +1,28 @@
+#! /bin/bash
+
+# Set deploy variables from .env file
+while read line; do
+    if [[ $line =~ .*DEPLOY.* ]]; then
+        export $(echo $line | xargs)
+    fi
+done < .env
+
+echo "Deploy started"
+echo "server:" $DEPLOY_TO_SSH
+echo "folder: "$DEPLOY_TO_FOLDER
+
+echo "Building image"
+docker-compose build default
+
+echo "Saving image"
+docker save -o tmp/image lastvocabularybot_default
+
+echo "Uploading image"
+rsync -vh tmp/image me@1650.k.hostens.cloud:~/lastbot/.
+
+echo "Stopping working container"
+ssh $DEPLOY_TO_SSH "cd $DEPLOY_TO_FOLDER && docker container stop $DEPLOY_CONTAINER_NAME"
+ssh $DEPLOY_TO_SSH "cd $DEPLOY_TO_FOLDER && docker container rm $DEPLOY_CONTAINER_NAME"
+
+echo "Start new container"
+ssh $DEPLOY_TO_SSH "cd $DEPLOY_TO_FOLDER && docker run --name=$DEPLOY_CONTAINER_NAME -d --env-file=.env lastvocabularybot_default"
